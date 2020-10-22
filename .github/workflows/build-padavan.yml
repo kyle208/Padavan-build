@@ -9,9 +9,9 @@ on:
   push:
     tags:
     - 'v*'
- branches: 
+  branches: 
    - master
- schedule:
+  schedule:
     - cron: 0 8 * * 5
 watch:
     types: [started]
