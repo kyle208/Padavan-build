@@ -60,7 +60,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' configs/templates/$TNAME.config       #删除配置项XUPNPD
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' configs/templates/$TNAME.config       #删除配置项DOGCOM
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' configs/templates/$TNAME.config #删除配置项DNSFORWARDER
-#sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' configs/templates/$TNAME.config       #删除配置项VLMCS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' configs/templates/$TNAME.config         #删除配置项TTYD
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' configs/templates/$TNAME.config       #删除配置项NAPT66
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' configs/templates/$TNAME.config       #删除配置项SRELAY
