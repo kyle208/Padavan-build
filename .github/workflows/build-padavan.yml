@@ -1,9 +1,7 @@
 #################################################################################################
 # 修改 TNAME: R2100 中的R2100为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-# 小米AC2100型号为R2100
-# 红米AC2100型号为RM2100
 #################################################################################################
-name: Build Padavan
+name: Build Padavan(创建Padavan固件)
 
 on: 
   release:
@@ -11,11 +9,11 @@ on:
   push:
     tags:
     - 'v*'
-  #  branches: 
-  #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
-  watch:
+ branches: 
+   - master
+ schedule:
+    - cron: 0 8 * * 5
+watch:
     types: [started]
 
 jobs:
@@ -24,9 +22,9 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-    - name: Checkout
+    - name: Checkout（检查）
       uses: actions/checkout@master
-    - name: Initialization environment
+    - name: Initialization environment（初始化环境）
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -34,15 +32,15 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
-    - name: Clone source code
+    - name: Clone source code（克隆环境代码）
       run: |
         git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
-    - name: Build Firmware
+    - name: Build Firmware（创建固件）
       env:
-        TNAME: R2100
+        TNAME: PSG1208
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -121,7 +119,7 @@ jobs:
         sudo fakeroot ./build_firmware_modify $TNAME
         #sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
-    - name : Upload packages
+    - name : Upload packages（上传packages）
       uses: actions/upload-artifact@master
       if: always()
       with:
